@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -28,7 +28,13 @@ public class BookController {
         Book savedBook = bookService.save(book);
         return ResponseEntity.ok().body(savedBook);
     }
-
+     
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Book book)  {
+        Book savedBook = bookService.save(book);
+        return ResponseEntity.ok().body(savedBook);
+    }
+     
 
 
     @GetMapping("/titlesAndCategories")
@@ -41,6 +47,12 @@ public class BookController {
     @GetMapping("/name")
     public ResponseEntity<?> findByName(@RequestParam(value="name") String name){
         Set<Book> books= bookService.findByName(name);
+        return ResponseEntity.ok().body(books);
+    }
+
+    @GetMapping("/author")
+    public ResponseEntity<?> findByAuthor(@RequestParam(value="author") String author){
+        Set<Book> books= bookService.findByAuthor(author);
         return ResponseEntity.ok().body(books);
     }
 
